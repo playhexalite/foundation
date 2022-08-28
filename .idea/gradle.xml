@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/build-logic" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="distributionType" value="WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/foundation-core-biome" />
+            <option value="$PROJECT_DIR$/foundation-core-bom" />
+            <option value="$PROJECT_DIR$/foundation-core-command" />
+            <option value="$PROJECT_DIR$/foundation-core-common" />
+            <option value="$PROJECT_DIR$/foundation-core-container" />
+            <option value="$PROJECT_DIR$/foundation-core-ecs" />
+            <option value="$PROJECT_DIR$/foundation-core-entity" />
+            <option value="$PROJECT_DIR$/foundation-core-gameplay" />
+            <option value="$PROJECT_DIR$/foundation-core-scoreboard" />
+            <option value="$PROJECT_DIR$/foundation-core-text" />
+            <option value="$PROJECT_DIR$/foundation-platform-bukkit" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
