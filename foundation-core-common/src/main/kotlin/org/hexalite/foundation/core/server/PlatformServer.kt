@@ -39,4 +39,8 @@ public interface PlatformServer<E> {
      * @param kind The [KClass] for the event kind.
      */
     public fun <T : Any> enableSearchingFor(kind: KClass<T>)
+
+    /**
+     * Retrieve an geography.
+     */
 }
