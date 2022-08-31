@@ -1,46 +1,31 @@
 package org.hexalite.foundation.core.server
 
-import kotlinx.coroutines.flow.MutableSharedFlow
-import org.hexalite.foundation.core.entity.PlatformEntity
-import org.hexalite.foundation.core.event.PlatformEvent
-import org.hexalite.foundation.core.exception.EntityRetrievingFailedException
-import org.hexalite.foundation.core.identity.Identity
-import org.hexalite.mechanism.core.functional.Either
-import kotlin.reflect.KClass
+import org.hexalite.foundation.core.entity.EntityScope
+import org.hexalite.foundation.core.event.ProprietaryEventScope
+import org.hexalite.foundation.core.geography.GeographyScope
 
 /**
  * An abstraction layer over a generic Minecraft server implementation.
- * @param E The generic type of events this platform will run against.
+ * @param E The generic type of events this platform runs against.
+ * @param G The kind of geography this platform runs against.
+ * @param T The generic type of entities this platform runs against.
  * @author FromSyntax
  */
-public interface PlatformServer<E> {
+public interface PlatformServer<E : ProprietaryEventScope<*>, G : GeographyScope<*>, T : EntityScope<*, *>> {
     /**
-     * Retrieve a single entity active on this [PlatformServer]. Behind the scenes, this checks
-     * the kind of the given [identity] to see what kind of entity it will return.
-     * - [Identity.Uuid] - it will try to find an online or offline player, depending on the given parameters.
-     * - [Identity.Text] - it will find an online or offline player named like that, depending on the given parameters.
-     * - [Identity.Number] - it will find an entity with a number-assigned id
-     * @param identity The identity to be filtered on.
-     * @param allowInactive Whether this will search by offline players as well.
+     * The scope for managing proprietary events within this specific platform.
      */
-    public suspend fun findEntity(identity: Identity, allowInactive: Boolean = false):
-            Either<PlatformEntity, EntityRetrievingFailedException>
+    public val events: E
 
     /**
-     * The global shared flow for proprietary event publishing and consumption. It works by searching for events that
-     * were opt in to be listened to. To make an event type be listened here, you need to let the platform know it by
-     * using [enableSearchingFor].
+     * The scope for managing geographies within this specific platform.
      */
-    public val events: MutableSharedFlow<PlatformEvent<E>>
+    public val geographies: G
 
     /**
-     * Let the global shared flow search for a specific kind of proprietary event.
-     * @param T The kind of event to be searched for.
-     * @param kind The [KClass] for the event kind.
+     * The scope for managing entities within this specific platform, no matter what geography that entity
+     * belongs to.
      */
-    public fun <T : Any> enableSearchingFor(kind: KClass<T>)
-
-    /**
-     * Retrieve an geography.
-     */
+    public val entities: T
 }
+

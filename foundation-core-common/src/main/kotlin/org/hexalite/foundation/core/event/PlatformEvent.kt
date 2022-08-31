@@ -10,8 +10,9 @@ import org.hexalite.foundation.core.entrypoint.WithEntrypoint
 public interface PlatformEvent<S> : WithEntrypoint {
     /**
      * Returns where this event come from originally; the source for this platform-agnostic event.
+     * If this event is not proprietary, it may return null.
      */
-    public val source: S
+    public val source: S?
 
     /**
      * A cancellable version of [PlatformEvent].

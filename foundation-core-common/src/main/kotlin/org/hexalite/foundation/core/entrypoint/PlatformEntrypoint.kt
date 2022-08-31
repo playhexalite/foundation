@@ -2,8 +2,11 @@ package org.hexalite.foundation.core.entrypoint
 
 import kotlinx.coroutines.flow.Flow
 import mu.KLogger
+import org.hexalite.foundation.core.entity.EntityScope
 import org.hexalite.foundation.core.event.PlatformEvent
+import org.hexalite.foundation.core.event.ProprietaryEventScope
 import org.hexalite.foundation.core.exception.AddonEntrypointFailedException
+import org.hexalite.foundation.core.geography.GeographyScope
 import org.hexalite.foundation.core.server.PlatformServer
 import org.hexalite.mechanism.core.functional.Either
 import java.io.File
@@ -13,20 +16,23 @@ import java.lang.Runtime.Version
  * The entrypoint for an add-on or plug-in of a server software platform. The goal of this type is to
  * give access to various features addressed by Foundation in any supported platform through the power
  * of this abstraction layer.
- * @param E The generic type of events this platform will run against.
+ * @param E The generic type of events this platform runs against.
+ * @param G The kind of geography this platform runs against.
+ * @param T The generic type of entities this platform runs against.
  * @author FromSyntax
  */
-public interface PlatformEntrypoint<E>: WithEntrypoint {
+public interface PlatformEntrypoint<E : ProprietaryEventScope<*>, G : GeographyScope<*>, T : EntityScope<*, *>> :
+    WithEntrypoint {
     /**
      * The wrapped add-on entrypoint instance this abstraction is attached to.
      */
-    override val entrypoint: PlatformEntrypoint<E>
+    public override val entrypoint: PlatformEntrypoint<E, G, T>
         get() = this
 
     /**
      * The server this add-on is running on.
      */
-    public val server: PlatformServer<E>
+    public val server: PlatformServer<E, G, T>
 
     /**
      * All kind of platforms this add-on can be run against.

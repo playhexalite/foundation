@@ -1,6 +1,7 @@
 package org.hexalite.foundation.core.entity
 
 import org.hexalite.foundation.core.identity.Identity
+import org.hexalite.foundation.core.math.Position
 
 /**
  * A representative wrapper for a platform-specific entity.
@@ -23,6 +24,11 @@ public interface PlatformEntity {
      * [PlatformPlayer]s it will be its username.
      */
     public val nameIdentity: Identity.Text?
+
+    /**
+     * Returns the position of this [PlatformEntity] in a geography.
+     */
+    public val position: Position
 }
 
 /**

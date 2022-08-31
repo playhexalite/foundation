@@ -10,5 +10,5 @@ public interface WithEntrypoint {
     /**
      * The wrapped add-on entrypoint instance this abstraction is attached to.
      */
-    public val entrypoint: PlatformEntrypoint<*>
+    public val entrypoint: PlatformEntrypoint<*, *, *>
 }
